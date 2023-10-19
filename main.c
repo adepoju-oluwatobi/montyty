@@ -1,6 +1,6 @@
 #include "monty.h"
 
-vars var;
+variableiables variable;
 
 /**
  * main - Start LIFO, FILO program
@@ -18,27 +18,27 @@ int main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 
-	if (start_vars(&var) != 0)
+	if (start_variableiables(&variable) != 0)
 		return (EXIT_FAILURE);
 
-	var.file = fopen(av[1], "r");
-	if (!var.file)
+	variable.file = fopen(av[1], "r");
+	if (!variable.file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		free_all();
 		return (EXIT_FAILURE);
 	}
 
-	while (getline(&var.buff, &var.tmp, var.file) != EOF)
+	while (getline(&variable.buffer, &variable.tmp, variable.file) != EOF)
 	{
-		opcode = strtok(var.buff, " \r\t\n");
+		opcode = strtok(variable.buffer, " \r\t\n");
 		if (opcode != NULL)
-			if (call_funct(&var, opcode) == EXIT_FAILURE)
+			if (call_function(&variable, opcode) == EXIT_FAILURE)
 			{
 				free_all();
 				return (EXIT_FAILURE);
 			}
-		var.line_number++;
+		variable.line_num++;
 	}
 
 	free_all();

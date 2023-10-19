@@ -11,7 +11,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <ctype.h>
-#define Buffsize 30
+#define buffersize 30
 
 /**
  * struct stack_s - Doubly linked list representation of a stack (or queue)
@@ -40,74 +40,74 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
-} instruction_t;
+	void (*f)(stack_t **stack, unsigned int line_num);
+} instruct_t;
 
 
 /**
- * struct glob_var - golbal variables
+ * struct glob_variable - golbal variableiables
  * @file: file name
- * @buff: Getline buffer
+ * @buffer: Getline bufferer
  * @tmp: Getline counter
  * @dict: instruction dictionary
  * @head: pointer to list
- * @line_number: Stores file current line
+ * @line_num: Stores file current line
  * @MODE: Program configuration stack or queue
  */
-typedef struct glob_var
+typedef struct glob_variable
 {
 	FILE *file;
-	char *buff;
+	char *buffer;
 	size_t tmp;
-	instruction_t *dict;
+	instruct_t *dict;
 	stack_t *head;
-	unsigned int line_number;
+	unsigned int line_num;
 	int MODE;
-} vars;
+} variables;
 
 
-extern vars var;
+extern variables variable;
 
 /* ================================================================= */
 /* man_file.c */
 /* ================================================================= */
-int start_vars(vars *var);
-instruction_t *create_instru();
-int call_funct(vars *var, char *opcode);
+int start_variables(variables *variable);
+instruct_t *create_instru();
+int call_function(variables *variable, char *opcode);
 void free_all(void);
-int _isdigit(char *string);
+int _is_digit(char *string);
 
 /* ================================================================= */
 /* op_funct.c */
 /* ================================================================= */
-void pall(stack_t **stack, unsigned int line_number);
-void push(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_num);
+void push(stack_t **stack, unsigned int line_num);
+void pint(stack_t **stack, unsigned int line_num);
+void pop(stack_t **stack, unsigned int line_num);
 
 /* ================================================================= */
 /* op_funct_2.c */
 /* ================================================================= */
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
-void divi(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_num);
+void add(stack_t **stack, unsigned int line_num);
+void sub(stack_t **stack, unsigned int line_num);
+void divi(stack_t **stack, unsigned int line_num);
 
 /* ================================================================= */
 /* op_funct_3.c */
 /* ================================================================= */
-void mul(stack_t **stack, unsigned int line_number);
-void mod(stack_t **stack, unsigned int line_number);
-void pchar(stack_t **stack, unsigned int line_number);
-void pstr(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_num);
+void mod(stack_t **stack, unsigned int line_num);
+void pchar(stack_t **stack, unsigned int line_num);
+void pstr(stack_t **stack, unsigned int line_num);
 
 /* ================================================================= */
 /* op_funct_4.c */
 /* ================================================================= */
-void rotl(stack_t **stack, unsigned int line_number);
-void rotr(stack_t **stack, unsigned int line_number);
-void stack(stack_t **stack, unsigned int line_number);
-void queue(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_num);
+void rotr(stack_t **stack, unsigned int line_num);
+void stack(stack_t **stack, unsigned int line_num);
+void queue(stack_t **stack, unsigned int line_num);
 
 
 #endif

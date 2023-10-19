@@ -1,21 +1,21 @@
 #include "monty.h"
 
 /**
- * start_vars - Fake rand to jackpoint Giga Millions
- * @var: Global variables to initialize
+ * start_variableiables - Fake rand to jackpoint Giga Millions
+ * @variable: Global variableiables to initialize
  * Return: 0 Success, 1 Failed
  */
-int start_vars(vars *var)
+int start_variables(variables *variable)
 {
-	var->file = NULL;
-	var->buff = NULL;
-	var->tmp = 0;
-	var->dict = create_instru();
-	if (var->dict == NULL)
+	variable->file = NULL;
+	variable->buffer = NULL;
+	variable->tmp = 0;
+	variable->dict = create_instru();
+	if (variable->dict == NULL)
 		return (EXIT_FAILURE);
-	var->head = NULL;
-	var->line_number = 1;
-	var->MODE = 0;
+	variable->head = NULL;
+	variable->line_num = 1;
+	variable->MODE = 0;
 
 	return (EXIT_SUCCESS);
 }
@@ -24,9 +24,9 @@ int start_vars(vars *var)
  * create_instru - Create new functions dictionary
  * Return: Dictionary pointer
  */
-instruction_t *create_instru()
+instruct_t *create_instru()
 {
-	instruction_t *ptr = malloc(sizeof(instruction_t) * 18);
+	instruct_t *ptr = malloc(sizeof(instruct_t) * 18);
 
 	if (!ptr)
 	{
@@ -56,27 +56,27 @@ instruction_t *create_instru()
 }
 
 /**
- * call_funct - Call Functions
- * @var: Global variables
+ * call_function - Call Functions
+ * @variable: Global variableiables
  * @opcode: Command to execute
  * Return: None
  */
-int call_funct(vars *var, char *opcode)
+int call_function(variables *variable, char *opcode)
 {
 	int i;
 
-	for (i = 0; var->dict[i].opcode; i++)
-		if (strcmp(opcode, var->dict[i].opcode) == 0)
+	for (i = 0; variable->dict[i].opcode; i++)
+		if (strcmp(opcode, variable->dict[i].opcode) == 0)
 		{
-			if (!var->dict[i].f)
+			if (!variable->dict[i].f)
 				return (EXIT_SUCCESS);
-			var->dict[i].f(&var->head, var->line_number);
+			variable->dict[i].f(&variable->head, variable->line_num);
 			return (EXIT_SUCCESS);
 		}
 	if (strlen(opcode) != 0 && opcode[0] != '#')
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n",
-			var->line_number, opcode);
+			variable->line_num, opcode);
 		return (EXIT_FAILURE);
 	}
 
@@ -90,28 +90,28 @@ int call_funct(vars *var, char *opcode)
  */
 void free_all(void)
 {
-	if (var.buff != NULL)
-		free(var.buff);
-	if (var.file != NULL)
-		fclose(var.file);
-	free(var.dict);
-	if (var.head != NULL)
+	if (variable.buffer != NULL)
+		free(variable.buffer);
+	if (variable.file != NULL)
+		fclose(variable.file);
+	free(variable.dict);
+	if (variable.head != NULL)
 	{
-		while (var.head->next != NULL)
+		while (variable.head->next != NULL)
 		{
-			var.head = var.head->next;
-			free(var.head->prev);
+			variable.head = variable.head->next;
+			free(variable.head->prev);
 		}
-		free(var.head);
+		free(variable.head);
 	}
 }
 
 /**
- * _isdigit - Clean all program mallocs
+ * _is_digit - Clean all program mallocs
  * @string: Num to validate
  * Return: 0 Success, 1 Failed
  */
-int _isdigit(char *string)
+int _is_digit(char *string)
 {
 	int i;
 
