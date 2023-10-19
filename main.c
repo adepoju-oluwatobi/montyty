@@ -1,6 +1,6 @@
 #include "monty.h"
 
-variableiables variable;
+variables variable;
 
 /**
  * main - Start LIFO, FILO program
@@ -18,7 +18,7 @@ int main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 
-	if (start_variableiables(&variable) != 0)
+	if (start_variables(&variable) != 0)
 		return (EXIT_FAILURE);
 
 	variable.file = fopen(av[1], "r");
@@ -29,7 +29,7 @@ int main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 
-	while (getline(&variable.buffer, &variable.tmp, variable.file) != EOF)
+	while (getline(&variable.buffer, &variable.temp, variable.file) != EOF)
 	{
 		opcode = strtok(variable.buffer, " \r\t\n");
 		if (opcode != NULL)

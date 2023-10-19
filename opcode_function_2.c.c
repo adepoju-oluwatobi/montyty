@@ -5,9 +5,9 @@
  * @stack: Double linked list
  * @line_num: File line execution
  */
-void swap(stack_t **stack, unsigned int line_num)
+void swap(stack_list **stack, unsigned int line_num)
 {
-	int tmp;
+	int temp;
 
 	if (!*stack || !(*stack)->next)
 	{
@@ -16,9 +16,9 @@ void swap(stack_t **stack, unsigned int line_num)
 		free_all();
 		exit(EXIT_FAILURE);
 	}
-	tmp = (*stack)->n;
+	temp = (*stack)->n;
 	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = tmp;
+	(*stack)->next->n = temp;
 }
 
 /**
@@ -26,7 +26,7 @@ void swap(stack_t **stack, unsigned int line_num)
  * @stack: Double linked list
  * @line_num: File line execution
  */
-void add(stack_t **stack, unsigned int line_num)
+void add(stack_list **stack, unsigned int line_num)
 {
 	if (!*stack || !(*stack)->next)
 	{
@@ -44,7 +44,7 @@ void add(stack_t **stack, unsigned int line_num)
  * @stack: Double linked list
  * @line_num: Line counter
  */
-void sub(stack_t **stack, unsigned int line_num)
+void sub(stack_list **stack, unsigned int line_num)
 {
 	if (!*stack || !(*stack)->next)
 	{
@@ -62,7 +62,7 @@ void sub(stack_t **stack, unsigned int line_num)
  * @stack: Double linked list
  * @line_num: File line counter
  */
-void divi(stack_t **stack, unsigned int line_num)
+void divi(stack_list **stack, unsigned int line_num)
 {
 	if (!*stack || !(*stack)->next)
 	{

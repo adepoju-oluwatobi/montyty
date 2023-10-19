@@ -14,7 +14,7 @@
 #define buffersize 30
 
 /**
- * struct stack_s - Doubly linked list representation of a stack (or queue)
+ * struct stack_element - Doubly linked list representation of a stack (or queue)
  * @n: Integer
  * @prev: Points to the previous element of the stack (or queue)
  * @next: Points to the next element of the stack (or queue)
@@ -22,12 +22,12 @@
  * Description: Doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
-typedef struct stack_s
+typedef struct stack_element
 {
 	int n;
-	struct stack_s *prev;
-	struct stack_s *next;
-} stack_t;
+	struct stack_element *prev;
+	struct stack_element *next;
+} stack_list;
 
 /**
  * struct instruction_s - Opcode and its function
@@ -40,16 +40,16 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_num);
-} instruct_t;
+	void (*f)(stack_list **stack, unsigned int line_num);
+} instruct_list;
 
 
 /**
  * struct glob_variable - golbal variableiables
  * @file: file name
  * @buffer: Getline bufferer
- * @tmp: Getline counter
- * @dict: instruction dictionary
+ * @temp: Getline counter
+ * @dictionary: instruction dictionaryionary
  * @head: pointer to list
  * @line_num: Stores file current line
  * @MODE: Program configuration stack or queue
@@ -58,9 +58,9 @@ typedef struct glob_variable
 {
 	FILE *file;
 	char *buffer;
-	size_t tmp;
-	instruct_t *dict;
-	stack_t *head;
+	size_t temp;
+	instruct_list *dictionary;
+	stack_list *head;
 	unsigned int line_num;
 	int MODE;
 } variables;
@@ -69,45 +69,45 @@ typedef struct glob_variable
 extern variables variable;
 
 /* ================================================================= */
-/* man_file.c */
+/* main_file.c */
 /* ================================================================= */
 int start_variables(variables *variable);
-instruct_t *create_instru();
+instruct_list *create_instru();
 int call_function(variables *variable, char *opcode);
 void free_all(void);
 int _is_digit(char *string);
 
 /* ================================================================= */
-/* op_funct.c */
+/* opcode_function.c */
 /* ================================================================= */
-void pall(stack_t **stack, unsigned int line_num);
-void push(stack_t **stack, unsigned int line_num);
-void pint(stack_t **stack, unsigned int line_num);
-void pop(stack_t **stack, unsigned int line_num);
+void pall(stack_list **stack, unsigned int line_num);
+void push(stack_list **stack, unsigned int line_num);
+void pint(stack_list **stack, unsigned int line_num);
+void pop(stack_list **stack, unsigned int line_num);
 
 /* ================================================================= */
-/* op_funct_2.c */
+/* opcode_function_2.c */
 /* ================================================================= */
-void swap(stack_t **stack, unsigned int line_num);
-void add(stack_t **stack, unsigned int line_num);
-void sub(stack_t **stack, unsigned int line_num);
-void divi(stack_t **stack, unsigned int line_num);
+void swap(stack_list **stack, unsigned int line_num);
+void add(stack_list **stack, unsigned int line_num);
+void sub(stack_list **stack, unsigned int line_num);
+void divi(stack_list **stack, unsigned int line_num);
 
 /* ================================================================= */
-/* op_funct_3.c */
+/* opcode_function_3.c */
 /* ================================================================= */
-void mul(stack_t **stack, unsigned int line_num);
-void mod(stack_t **stack, unsigned int line_num);
-void pchar(stack_t **stack, unsigned int line_num);
-void pstr(stack_t **stack, unsigned int line_num);
+void mul(stack_list **stack, unsigned int line_num);
+void mod(stack_list **stack, unsigned int line_num);
+void pchar(stack_list **stack, unsigned int line_num);
+void pstr(stack_list **stack, unsigned int line_num);
 
 /* ================================================================= */
-/* op_funct_4.c */
+/* opcode_function_4.c */
 /* ================================================================= */
-void rotl(stack_t **stack, unsigned int line_num);
-void rotr(stack_t **stack, unsigned int line_num);
-void stack(stack_t **stack, unsigned int line_num);
-void queue(stack_t **stack, unsigned int line_num);
+void rotl(stack_list **stack, unsigned int line_num);
+void rotr(stack_list **stack, unsigned int line_num);
+void stack(stack_list **stack, unsigned int line_num);
+void queue(stack_list **stack, unsigned int line_num);
 
 
 #endif

@@ -9,9 +9,9 @@ int start_variables(variables *variable)
 {
 	variable->file = NULL;
 	variable->buffer = NULL;
-	variable->tmp = 0;
-	variable->dict = create_instru();
-	if (variable->dict == NULL)
+	variable->temp = 0;
+	variable->dictionary = create_instru();
+	if (variable->dictionary == NULL)
 		return (EXIT_FAILURE);
 	variable->head = NULL;
 	variable->line_num = 1;
@@ -21,12 +21,12 @@ int start_variables(variables *variable)
 }
 
 /**
- * create_instru - Create new functions dictionary
- * Return: Dictionary pointer
+ * create_instru - Create new functions dictionaryionary
+ * Return: dictionaryionary pointer
  */
-instruct_t *create_instru()
+instruct_list *create_instru()
 {
-	instruct_t *ptr = malloc(sizeof(instruct_t) * 18);
+	instruct_list *ptr = malloc(sizeof(instruct_list) * 18);
 
 	if (!ptr)
 	{
@@ -65,12 +65,12 @@ int call_function(variables *variable, char *opcode)
 {
 	int i;
 
-	for (i = 0; variable->dict[i].opcode; i++)
-		if (strcmp(opcode, variable->dict[i].opcode) == 0)
+	for (i = 0; variable->dictionary[i].opcode; i++)
+		if (strcmp(opcode, variable->dictionary[i].opcode) == 0)
 		{
-			if (!variable->dict[i].f)
+			if (!variable->dictionary[i].f)
 				return (EXIT_SUCCESS);
-			variable->dict[i].f(&variable->head, variable->line_num);
+			variable->dictionary[i].f(&variable->head, variable->line_num);
 			return (EXIT_SUCCESS);
 		}
 	if (strlen(opcode) != 0 && opcode[0] != '#')
@@ -94,7 +94,7 @@ void free_all(void)
 		free(variable.buffer);
 	if (variable.file != NULL)
 		fclose(variable.file);
-	free(variable.dict);
+	free(variable.dictionary);
 	if (variable.head != NULL)
 	{
 		while (variable.head->next != NULL)
