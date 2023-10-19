@@ -4,17 +4,17 @@
  * @stack: Double linked list
  * @line_num: File line execution
  */
-void pall(stack_t **stack, unsigned int line_num)
+void pall(stack_list **stack, unsigned int line_num)
 {
-	stack_t *tmp = *stack;
+	stack_list *temp = *stack;
 	(void) line_num;
 
-	if (!tmp)
+	if (!temp)
 		return;
-	while (tmp)
+	while (temp)
 	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->next;
+		printf("%d\n", temp->n);
+		temp = temp->next;
 	}
 }
 
@@ -23,9 +23,9 @@ void pall(stack_t **stack, unsigned int line_num)
  * @stack: Double linked list
  * @line_num: File line execution
  */
-void push(stack_t **stack, unsigned int line_num)
+void push(stack_list **stack, unsigned int line_num)
 {
-	stack_t *tmp = NULL, *tm = *stack;
+	stack_list *temp = NULL, *tm = *stack;
 	char *num;
 
 	num = strtok(NULL, " \r\t\n");
@@ -35,29 +35,29 @@ void push(stack_t **stack, unsigned int line_num)
 		free_all();
 		exit(EXIT_FAILURE);
 	}
-	tmp = malloc(sizeof(stack_t));
-	if (!tmp)
+	temp = malloc(sizeof(stack_list));
+	if (!temp)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free_all();
 		exit(EXIT_FAILURE);
 	}
-	tmp->n = atoi(num);
+	temp->n = atoi(num);
 	if (variable.MODE == 0 || !*stack)
 	{
-		tmp->next = *stack;
-		tmp->prev = NULL;
+		temp->next = *stack;
+		temp->prev = NULL;
 		if (*stack)
-			(*stack)->prev = tmp;
-		*stack = tmp;
+			(*stack)->prev = temp;
+		*stack = temp;
 	}
 	else
 	{
 		while (tm->next)
 			tm = tm->next;
-		tm->next = tmp;
-		tmp->prev = tm;
-		tmp->next = NULL;
+		tm->next = temp;
+		temp->prev = tm;
+		temp->next = NULL;
 	}
 }
 
@@ -66,7 +66,7 @@ void push(stack_t **stack, unsigned int line_num)
  * @stack: Double linked list
  * @line_num: File line execution
  */
-void pint(stack_t **stack, unsigned int line_num)
+void pint(stack_list **stack, unsigned int line_num)
 {
 	if (!*stack)
 	{
@@ -82,9 +82,9 @@ void pint(stack_t **stack, unsigned int line_num)
 * @stack: Double linked list
 * @line_num: File line execution
 */
-void pop(stack_t **stack, unsigned int line_num)
+void pop(stack_list **stack, unsigned int line_num)
 {
-	stack_t *tmp;
+	stack_list *temp;
 
 	if (!*stack)
 	{
@@ -93,9 +93,9 @@ void pop(stack_t **stack, unsigned int line_num)
 		exit(EXIT_FAILURE);
 	}
 
-	tmp = *stack;
-	*stack = tmp->next;
-	if (tmp->next)
-		tmp->next->prev = NULL;
-	free(tmp);
+	temp = *stack;
+	*stack = temp->next;
+	if (temp->next)
+		temp->next->prev = NULL;
+	free(temp);
 }
