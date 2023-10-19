@@ -2,12 +2,12 @@
 /**
  * pall - Print list
  * @stack: Double linked list
- * @line_number: File line execution
+ * @line_num: File line execution
  */
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_num)
 {
 	stack_t *tmp = *stack;
-	(void) line_number;
+	(void) line_num;
 
 	if (!tmp)
 		return;
@@ -21,17 +21,17 @@ void pall(stack_t **stack, unsigned int line_number)
 /**
  * push - Insert a new value in list
  * @stack: Double linked list
- * @line_number: File line execution
+ * @line_num: File line execution
  */
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_num)
 {
 	stack_t *tmp = NULL, *tm = *stack;
 	char *num;
 
 	num = strtok(NULL, " \r\t\n");
-	if (num == NULL || (_isdigit(num) != 0 && num[0] != '-'))
+	if (num == NULL || (line_num(num) != 0 && num[0] != '-'))
 	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		fprintf(stderr, "L%u: usage: push integer\n", line_num);
 		free_all();
 		exit(EXIT_FAILURE);
 	}
@@ -43,7 +43,7 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	tmp->n = atoi(num);
-	if (var.MODE == 0 || !*stack)
+	if (variable.MODE == 0 || !*stack)
 	{
 		tmp->next = *stack;
 		tmp->prev = NULL;
@@ -64,13 +64,13 @@ void push(stack_t **stack, unsigned int line_number)
 /**
  * pint - Print last node
  * @stack: Double linked list
- * @line_number: File line execution
+ * @line_num: File line execution
  */
-void pint(stack_t **stack, unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_num)
 {
 	if (!*stack)
 	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_num);
 		free_all();
 		exit(EXIT_FAILURE);
 	}
@@ -80,15 +80,15 @@ void pint(stack_t **stack, unsigned int line_number)
 /**
 * pop - Delete top of list
 * @stack: Double linked list
-* @line_number: File line execution
+* @line_num: File line execution
 */
-void pop(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_num)
 {
 	stack_t *tmp;
 
 	if (!*stack)
 	{
-		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_num);
 		free_all();
 		exit(EXIT_FAILURE);
 	}
